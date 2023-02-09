@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CNORRIS_Scheduler</string>
+    <string name="welcomeText">Welcome to CNORRIS\'s Scheduler Application! Either choose an option from the dropdown menu above or click on the terms (clock) icon to start.</string>
+</resources>

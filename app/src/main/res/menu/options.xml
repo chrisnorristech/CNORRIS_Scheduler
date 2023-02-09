@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/termsViewer"
+        android:title="View Terms"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/coursesViewer"
+        android:title="View Courses"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/assessmentsViewer"
+        android:title="View Assessments"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/terms"
+        android:title="Terms"
+        android:icon="@drawable/terms"
+        app:showAsAction="always" />
+</menu>
