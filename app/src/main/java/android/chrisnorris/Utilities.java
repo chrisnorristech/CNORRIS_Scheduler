@@ -14,6 +14,14 @@ public class Utilities {
         context.startActivity(intent);
     }
 
+    public static void switchActivityWithValue(Context context, Class newActivity, String form_mode, int value) {
+        Intent intent = new Intent(context, newActivity);
+        intent.putExtra("form_mode", form_mode);
+        intent.putExtra("value", value);
+        context.startActivity(intent);
+    }
+
+
     public static String dateAsString(Date date) {
         String formatted_date = "";
         try {

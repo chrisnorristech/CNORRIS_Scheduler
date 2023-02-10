@@ -49,6 +49,13 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
         buildTermTable();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        table.removeAllViews();
+        buildTermTable();
+    }
+
     /**
      * buildTermTable - create the table layout for terms
      */
@@ -79,7 +86,9 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
         Button btnAddTerm = new Button(this);
         btnAddTerm.setText("Add Term");
         btnAddTerm.setTag(R.id.button_name, "button_add_term");
-        btnAddTerm.setWidth(width/3);
+        btnAddTerm.setTag(R.id.term_id, -1);
+        btnAddTerm.setTag(R.id.course_id, -1);
+        btnAddTerm.setWidth(width / 3);
         btnAddTerm.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         btnAddTerm.setOnClickListener(this);
         add_term_wrapper.addView(btnAddTerm);
@@ -119,7 +128,7 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
             btnEditTerm.setTag(R.id.button_name, "button_edit_term");
             btnEditTerm.setTag(R.id.term_id, term.getId());
             btnEditTerm.setTag(R.id.course_id, -1);
-            btnEditTerm.setWidth(width/3);
+            btnEditTerm.setWidth(width / 3);
             btnEditTerm.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             btnEditTerm.setOnClickListener(this);
             buttonBar.addView(btnEditTerm);
@@ -129,7 +138,7 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
             btnDeleteTerm.setTag(R.id.button_name, "button_delete_term");
             btnDeleteTerm.setTag(R.id.term_id, term.getId());
             btnDeleteTerm.setTag(R.id.course_id, -1);
-            btnDeleteTerm.setWidth(width/3);
+            btnDeleteTerm.setWidth(width / 3);
             btnDeleteTerm.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             btnDeleteTerm.setOnClickListener(this);
             buttonBar.addView(btnDeleteTerm);
@@ -156,7 +165,7 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
             Button btnAddCourse = new Button(this);
             btnAddCourse.setText("Add Course");
             btnAddCourse.setTag(R.id.button_name, "button_add_course");
-            btnAddCourse.setWidth(width/3);
+            btnAddCourse.setWidth(width / 3);
             btnAddCourse.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             btnAddCourse.setOnClickListener(this);
             add_course_wrapper.addView(btnAddCourse);
@@ -195,7 +204,7 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
                 btnEditCourse.setTag(R.id.button_name, "button_edit_course");
                 btnEditCourse.setTag(R.id.term_id, term.getId());
                 btnEditCourse.setTag(R.id.course_id, course.getId());
-                btnEditCourse.setWidth(width/3);
+                btnEditCourse.setWidth(width / 3);
                 btnEditCourse.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 btnEditCourse.setOnClickListener(this);
                 courseButtonBar.addView(btnEditCourse);
@@ -205,7 +214,7 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
                 btnDeleteCourse.setTag(R.id.button_name, "button_delete_course");
                 btnDeleteCourse.setTag(R.id.term_id, term.getId());
                 btnDeleteCourse.setTag(R.id.course_id, course.getId());
-                btnDeleteCourse.setWidth(width/3);
+                btnDeleteCourse.setWidth(width / 3);
                 btnDeleteCourse.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 btnDeleteCourse.setOnClickListener(this);
                 courseButtonBar.addView(btnDeleteCourse);
@@ -223,14 +232,14 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
         int course_id = (int) v.getTag(R.id.course_id);
         switch (tag) {
             case "button_add_term":
-                Toast.makeText(v.getContext(), "clicked new term", Toast.LENGTH_SHORT).show();
+                Utilities.switchActivityWithValue(this, TermAddEditActivity.class, "Add", -1);
                 break;
             case "button_edit_term":
-                Toast.makeText(v.getContext(), "clicked " + tag + term_id, Toast.LENGTH_SHORT).show();
+                Utilities.switchActivityWithValue(this, TermAddEditActivity.class, "Edit", term_id);
                 break;
             case "button_delete_term":
                 Term termToBeDeleted = db.termDao().getTermById(term_id);
-                if(!doesTermHaveCourses(termToBeDeleted)) {
+                if (!doesTermHaveCourses(termToBeDeleted)) {
                     db.termDao().deleteTerm(termToBeDeleted);
                     table.removeAllViews();
                     buildTermTable();
@@ -253,7 +262,7 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
      */
     private boolean doesTermHaveCourses(Term term) {
         List<Course> coursesForTerm = db.courseDao().getCoursesByTermId(term.getId());
-        if(coursesForTerm.size()==0) {
+        if (coursesForTerm.size() == 0) {
             return false;
         } else {
             return true;

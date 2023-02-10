@@ -13,12 +13,18 @@
         android:theme="@style/Theme.CNORRIS_Scheduler"
         tools:targetApi="31">
         <activity
+            android:name=".UI.TermAddEditActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UI.AssessmentViewerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value=""
-                />
+                android:value="" />
         </activity>
         <activity
             android:name=".UI.CourseViewerActivity"

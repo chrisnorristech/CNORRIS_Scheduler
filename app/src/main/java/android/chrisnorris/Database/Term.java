@@ -71,6 +71,6 @@ public class Term {
     }
 
     public String asString() {
-    return "Term: " + mTerm_Name + "\nStart:" + mStart_Date + "\nEnd:" + mEnd_Date;
+    return "Term Name: " + mTerm_Name + "\nStart Date:" + mStart_Date + "\nEnd Date:" + mEnd_Date;
     }
 }
