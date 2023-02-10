@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="button_name" type="id"/>
+    <item name="term_id" type="id" />
+    <item name="course_id" type="id" />
+</resources>
