@@ -16,7 +16,6 @@ import android.chrisnorris.Utilities;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,8 +119,13 @@ public class TermsDetailActivity extends AppCompatActivity implements View.OnCli
         TableRow.LayoutParams layout_full_width = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
 
         // build header row
-        LinearLayout header_row = Utilities.build_header_row(this, c_HEADER_TITLE);
-        cl_MAIN_LAYOUT.addView(header_row);
+        if(!Objects.equals(cl_form_mode, cl_form_mode_add)) {
+            LinearLayout header_row = Utilities.build_header_row(this, c_HEADER_TITLE + ": " + term.getTerm_Name());
+            cl_MAIN_LAYOUT.addView(header_row);
+        } else {
+            LinearLayout header_row = Utilities.build_header_row(this, "NEW TERM");
+            cl_MAIN_LAYOUT.addView(header_row);
+        }
 
         if(!Objects.equals(cl_form_mode_add, cl_form_mode)) {
             build_term_inputs(term);
@@ -218,13 +222,6 @@ public class TermsDetailActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    // handles creation of options menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.options, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
     // methods to control what happens when user
     // clicks on the action buttons
     @Override
@@ -234,9 +231,6 @@ public class TermsDetailActivity extends AppCompatActivity implements View.OnCli
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.terms:
-                Utilities.switchActivity(this, TermsDetailActivity.class);
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -245,18 +239,24 @@ public class TermsDetailActivity extends AppCompatActivity implements View.OnCli
     private void build_term_inputs(Term term) {
         // create edit texts for term details
         TextView tv_term_name = new TextView(this);
-        tv_term_name.setText( " Term Name: ");
+        tv_term_name.setText(R.string.term_name_label);
         TextView tv_term_start = new TextView(this);
-        tv_term_start.setText("   Start Date: ");
+        tv_term_start.setText(R.string.start_date_label);
         TextView tv_term_end = new TextView(this);
-        tv_term_end.setText(  "    End Date: ");
+        tv_term_end.setText(R.string.end_date_label);
 
         et_term_name = new EditText(this);
         et_term_name.setWidth(500);
+        tv_term_name.setWidth(300);
+        tv_term_name.setGravity(Gravity.RIGHT);
         et_term_start = new EditText(this);
         et_term_start.setWidth(500);
+        tv_term_start.setWidth(300);
+        tv_term_start.setGravity(Gravity.RIGHT);
         et_term_end = new EditText(this);
         et_term_end.setWidth(500);
+        tv_term_end.setWidth(300);
+        tv_term_end.setGravity(Gravity.RIGHT);
 
         // not adding
         if(term != null) {
