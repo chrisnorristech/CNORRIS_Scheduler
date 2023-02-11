@@ -2,9 +2,9 @@
     <string name="app_name">CNORRIS_Scheduler</string>
     <string name="welcomeText">Welcome to CNORRIS\'s Scheduler Application! Either choose an option from the dropdown menu above or click on the terms (clock) icon to start.</string>
     <string name="addNewTermHeader">Add Term</string>
-    <string name="term_name_label">Term Name</string>
-    <string name="start_date_label">Start Date</string>
-    <string name="end_date_label">End Date</string>
+    <string name="term_name_label">Term Name: </string>
+    <string name="start_date_label">Start Date: </string>
+    <string name="end_date_label">End Date: </string>
     <string name="addTermButtonText">Add Term</string>
     <string name="term_viewer">TERM VIEWER</string>
     <string name="course_name_text">Name: %1$s</string>
@@ -18,4 +18,5 @@
     <string name="btn_add_term_text">Add Term</string>
     <string name="form_mode_add">ADD</string>
     <string name="btn_delete_term_text">Delete Term</string>
+    <string name="no_terms_text">No terms found.</string>
 </resources>
