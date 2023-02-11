@@ -1,3 +1,11 @@
+// AppDatabase.java - application database abstraction
+// version 1.0b
+// Christopher D. Norris (cnorris@wgu.edu)
+// Western Governors University
+// Student ID: 000493268
+//
+// 2/10/2023 - initial development
+
 package android.chrisnorris.Database;
 
 import android.content.Context;
@@ -10,23 +18,25 @@ import androidx.room.RoomDatabase;
 @Database(entities = {Term.class, Course.class, Assessment.class}, version = 7)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static final String DATABASE_NAME = "cn_schedulerApp.db";
+    // c_ = constants
+    private static final String c_DATABASE_NAME = "cn_schedulerApp.db";
 
-    private static AppDatabase mAppDatabase;
+    // cl_ = class wide variable
+    private static AppDatabase cl_APP_DATABASE;
 
-    // Singleton
+    // Singleton in order to fetch db instance
     public static AppDatabase getInstance(Context context) {
-        if (mAppDatabase == null) {
-            mAppDatabase = Room.databaseBuilder(context, AppDatabase.class,
-                    DATABASE_NAME).allowMainThreadQueries()
+        if (cl_APP_DATABASE == null) {
+            cl_APP_DATABASE = Room.databaseBuilder(context, AppDatabase.class,
+                    c_DATABASE_NAME).allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build();
-            String dbPath = context.getDatabasePath(DATABASE_NAME).getAbsolutePath();
-            Log.d("DBLOCATION==>", dbPath);
+            String dbPath = context.getDatabasePath(c_DATABASE_NAME).getAbsolutePath();
         }
-        return mAppDatabase;
+        return cl_APP_DATABASE;
     }
 
+    // data access objects (DAO) declarations
     public abstract TermDao termDao();
     public abstract CourseDao courseDao();
     public abstract AssessmentDao assessmentDao();

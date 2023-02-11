@@ -13,49 +13,28 @@
         android:theme="@style/Theme.CNORRIS_Scheduler"
         tools:targetApi="31">
         <activity
-            android:name=".UI.TermAddEditActivity"
+            android:name=".UI.CourseDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UI.AssessmentViewerActivity"
+            android:name=".UI.TermsListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UI.CourseViewerActivity"
+            android:name=".UI.AssessmentDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UI.TermViewerActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".UI.AssessmentsActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".UI.CoursesActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".UI.TermsActivity"
+            android:name=".UI.TermsDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

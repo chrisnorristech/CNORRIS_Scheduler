@@ -6,4 +6,16 @@
     <string name="start_date_label">Start Date</string>
     <string name="end_date_label">End Date</string>
     <string name="addTermButtonText">Add Term</string>
+    <string name="term_viewer">TERM VIEWER</string>
+    <string name="course_name_text">Name: %1$s</string>
+    <string name="course_start_date_text">Start Date: %1$s</string>
+    <string name="course_end_date_text">End Date: %1$s</string>
+    <string name="course_instructor_text">Instructor: %1$s</string>
+    <string name="course_instructor_email_text">Instructor Email: %1$s</string>
+    <string name="course_instructor_phone_text">Instructor Phone: %1$s</string>
+    <string name="course_details_header">Course Details:</string>
+    <string name="no_course_text">No courses found.</string>
+    <string name="btn_add_term_text">Add Term</string>
+    <string name="form_mode_add">ADD</string>
+    <string name="btn_delete_term_text">Delete Term</string>
 </resources>

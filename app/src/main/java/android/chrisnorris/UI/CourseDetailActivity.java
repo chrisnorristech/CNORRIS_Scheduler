@@ -10,12 +10,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class CoursesActivity extends AppCompatActivity {
+public class CourseDetailActivity extends AppCompatActivity {
 
+    // handles activity startup / configures action bar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
+        setContentView(R.layout.activity_course_viewer);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(" Scheduler");
@@ -42,16 +43,7 @@ public class CoursesActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.terms:
-                Utilities.switchActivity(this, TermsActivity.class);
-                break;
-            case R.id.termsViewer:
-                Utilities.switchActivity(this, TermViewerActivity.class);
-                break;
-            case R.id.coursesViewer:
-                Utilities.switchActivity(this, CourseViewerActivity.class);
-                break;
-            case R.id.assessmentsViewer:
-                Utilities.switchActivity(this, AssessmentViewerActivity.class);
+                Utilities.switchActivity(this, TermsDetailActivity.class);
                 break;
         }
         return super.onOptionsItemSelected(item);

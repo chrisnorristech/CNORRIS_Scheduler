@@ -1,68 +1,80 @@
+// MainActivity.java - startup activity
+// version 1.0b
+// Christopher D. Norris (cnorris@wgu.edu)
+// Western Governors University
+// Student ID: 000493268
+//
+// 2/10/2023 - initial development
+
 package android.chrisnorris.UI;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.ActionMenuItem;
-
-import android.app.Activity;
 import android.chrisnorris.Database.AppDatabase;
 import android.chrisnorris.Database.Course;
 import android.chrisnorris.Database.Term;
-import android.chrisnorris.Database.TermDao;
 import android.chrisnorris.R;
 import android.chrisnorris.Utilities;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
-import java.util.List;
+import android.widget.TableLayout;
 
 public class MainActivity extends AppCompatActivity {
-    private String ActivityName;
+    // cl_ = class wide scope
+    private String cl_ACTIVITY_NAME;
+    private TableLayout cl_TABLE;
+    private AppDatabase cl_DB;
 
+    // c_ = CONSTANTS
+    private static final String c_APP_TITLE = " Scheduler";
+
+    // handles activity start up / configures action bar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActivityName = this.getClass().getSimpleName();
+        cl_ACTIVITY_NAME = this.getClass().getSimpleName();
+        cl_DB = AppDatabase.getInstance(this);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(" Scheduler");
-        actionBar.setIcon(R.drawable.school);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+        ActionBar action_bar = getSupportActionBar();
+        action_bar.setTitle(c_APP_TITLE);
+        action_bar.setIcon(R.drawable.school);
+        action_bar.setDisplayUseLogoEnabled(true);
+        action_bar.setDisplayShowHomeEnabled(true);
 
+        AppDatabase cl_DB = AppDatabase.getInstance(this);
+
+        addSampleData();
+    }
+
+    public void addSampleData() {
         Term testTerm = new Term("Spring 2023", "01/10/2023", "03/30/2023");
         Term testTerm2 = new Term("Summer 2023", "05/01/2023", "09/01/2023");
 
-        AppDatabase db = AppDatabase.getInstance(this);
-
-        Term testTermExists = db.termDao().getTermByName("Spring 2023");
-        Term testTerm2Exists = db.termDao().getTermByName("Summer 2023");
-        Log.d(ActivityName + "==>", testTerm.asString());
+        Term testTermExists = cl_DB.termDao().getTermByName("Spring 2023");
+        Term testTerm2Exists = cl_DB.termDao().getTermByName("Summer 2023");
         if(testTermExists != null) {
-            db.termDao().deleteTerm(testTermExists);
+            cl_DB.termDao().deleteTerm(testTermExists);
         }
         if(testTerm2Exists != null) {
-            db.termDao().deleteTerm(testTerm2Exists);
+            cl_DB.termDao().deleteTerm(testTerm2Exists);
         }
-        db.termDao().insertTerm(testTerm);
-        db.termDao().insertTerm(testTerm2);
+        cl_DB.termDao().insertTerm(testTerm);
+        cl_DB.termDao().insertTerm(testTerm2);
 
-        Course testCourse = db.courseDao().getCoursesByName("Test Course");
-        Course testCourse2 = db.courseDao().getCoursesByName("Test Course 3");
+        Course testCourse = cl_DB.courseDao().getCoursesByName("Test Course");
+        Course testCourse2 = cl_DB.courseDao().getCoursesByName("Test Course 3");
         //Log.d(ActivityName + "==>", testCourse.asString());
         if(testCourse != null) {
-            db.courseDao().deleteCourse(testCourse);
+            cl_DB.courseDao().deleteCourse(testCourse);
         }
         if(testCourse2 != null) {
-            db.courseDao().deleteCourse(testCourse2);
+            cl_DB.courseDao().deleteCourse(testCourse2);
         }
 
-        Term testTermID = db.termDao().getTermByName("Spring 2023");
+        Term testTermID = cl_DB.termDao().getTermByName("Spring 2023");
         int termID = testTermID.getId();
 
         Course course = new Course();
@@ -75,24 +87,22 @@ public class MainActivity extends AppCompatActivity {
         course.setNote("this is a note");
         course.setStatus("in progress");
         course.setTerm_id(termID);
-        db.courseDao().insertCourse(course);
+        cl_DB.courseDao().insertCourse(course);
 
         Course course2 = new Course();
         course2.setCourse_Name("Test Course 3");
-        course2.setStart_Date("01/01/2023");
-        course2.setEnd_Date("03/01/2023");
+        course2.setStart_Date("01/01/2023");course2.setEnd_Date("03/01/2023");
         course2.setInstructor("Chris Norris");
         course2.setInstructor_Email("chrisnorris070@gmail.com");
         course2.setInstructor_Phone("(337) 326-1109");
         course2.setNote("this is a note");
         course2.setStatus("in progress");
         course2.setTerm_id(termID);
-        db.courseDao().insertCourse(course2);
+        cl_DB.courseDao().insertCourse(course2);
     }
-
+    // inflates and displays options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.options, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -104,22 +114,9 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.terms:
-                Utilities.switchActivity(this, TermsActivity.class);
-                break;
-            case R.id.termsViewer:
-                Utilities.switchActivity(this, TermViewerActivity.class);
-                break;
-            case R.id.coursesViewer:
-                Utilities.switchActivity(this, CourseViewerActivity.class);
-                break;
-            case R.id.assessmentsViewer:
-                Utilities.switchActivity(this, AssessmentViewerActivity.class);
+                Utilities.switchActivity(this, TermsListActivity.class);
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void EnterHere(View view) {
-        Utilities.switchActivity(MainActivity.this, AssessmentsActivity.class);
     }
 }

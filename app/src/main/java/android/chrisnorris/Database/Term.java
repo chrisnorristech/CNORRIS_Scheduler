@@ -1,3 +1,11 @@
+// Term.java - term object abstraction
+// version 1.0b
+// Christopher D. Norris (cnorris@wgu.edu)
+// Western Governors University
+// Student ID: 000493268
+//
+// 2/10/2023 - initial development
+
 package android.chrisnorris.Database;
 
 import android.chrisnorris.Utilities;

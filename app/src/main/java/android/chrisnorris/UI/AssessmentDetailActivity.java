@@ -1,3 +1,11 @@
+// AssessmentDetail.java - assessment management
+// version 1.0b
+// Christopher D. Norris (cnorris@wgu.edu)
+// Western Governors University
+// Student ID: 000493268
+//
+// 2/10/2023 - initial development
+
 package android.chrisnorris.UI;
 
 import androidx.annotation.NonNull;
@@ -10,12 +18,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class AssessmentViewerActivity extends AppCompatActivity {
+public class AssessmentDetailActivity extends AppCompatActivity {
 
+    // handles activity start up / configures action bar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment_viewer);
+        setContentView(R.layout.activity_assessments);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(" Scheduler");
@@ -25,6 +34,7 @@ public class AssessmentViewerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    // handles creation of options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -42,16 +52,7 @@ public class AssessmentViewerActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.terms:
-                Utilities.switchActivity(this, TermsActivity.class);
-                break;
-            case R.id.termsViewer:
-                Utilities.switchActivity(this, TermViewerActivity.class);
-                break;
-            case R.id.coursesViewer:
-                Utilities.switchActivity(this, CourseViewerActivity.class);
-                break;
-            case R.id.assessmentsViewer:
-                Utilities.switchActivity(this, AssessmentViewerActivity.class);
+                Utilities.switchActivity(this, TermsDetailActivity.class);
                 break;
         }
         return super.onOptionsItemSelected(item);
